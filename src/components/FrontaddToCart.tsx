@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import RemoveFromCart from "./RemoveFromCart";
 import { useCartQuantity } from "@/app/utils/hooks";
 import { useSession } from "next-auth/react";
+import { PlusIcon } from "lucide-react";
 
 const AddToCart2 = ({ product }: { product: Product }) => {
   const { data: session } = useSession();
@@ -30,17 +31,17 @@ const AddToCart2 = ({ product }: { product: Product }) => {
       <div className="flex space-x-5 items-center">
         {/* <RemoveFromCart product={product} />
         <p>{itemCount}</p> */}
-        <Button
+        <p
           className="text-black hover:text-yellow-500" 
           onClick={() => handleProduct(itemCount, product.stock)}
         >
-          +
-        </Button>
+          <PlusIcon/>
+        </p>
       </div>
     ) : (
-      <Button  className="text-black hover:text-yellow-500" onClick={() => addProduct(product)}>
-        +
-      </Button>
+      <p  className="text-black hover:text-yellow-500" onClick={() => addProduct(product)}>
+       <PlusIcon/>
+      </p>
     )
   );
 

@@ -81,7 +81,7 @@ const Basket = () => {
         <p className="font-bold text-walmart-default mt-4 ml-auto text-xl">Total: USD {totalAmount}</p>
       </div>
 
-      <Button className="bg-walmart-default rounded-full px-8 py-6 w-full text-center hover:bg-blue-400" onClick={handleCheckout}>
+      <Button className="bg-walmart-default rounded-full  px-6 py-4 md:px-8  md:py-6 w-full text-center hover:bg-blue-400" onClick={handleCheckout}>
         Checkout
       </Button>
       {/* Button to trigger checkout; directs to sign-in if not logged in */}

@@ -27,7 +27,7 @@ const Search = async ({ searchParams }: { searchParams: { q: string } }) => {
               className="border p-4 rounded-lg shadow-lg flex flex-col justify-between cursor-pointer"
               key={product.id}
             >
-             <span className="flex flex-col mr-auto gap-2 absolute">
+          <span className="flex ml-auto gap-1  z-8  ">
         <WishlistComponent  productId={product.id}/> 
         <AddToCart2   product={product} />
         </span>

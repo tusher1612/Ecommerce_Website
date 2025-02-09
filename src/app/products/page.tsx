@@ -19,7 +19,7 @@ import AddToCart2 from "@/components/FrontaddToCart";
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
       {products.map((product) => (
         <div className="border p-4 rounded-lg shadow-lg flex flex-col h-[390px] cursor-pointer" key={product.id}>
-        <span className="flex flex-col mr-auto gap-2 absolute">
+        <span className="flex ml-auto gap-1  z-8  ">
         <WishlistComponent  productId={product.id}/> 
         <AddToCart2   product={product} />
         </span>
