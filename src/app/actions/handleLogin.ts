@@ -24,7 +24,7 @@ export const handleLogin = async (e: any) => {
   if (result?.error) {
     console.log("Invalid credentials. Please try again."); // Log error if credentials are incorrect
   } else {
-    console.log("Login Successful! Fetching session...");
+    alert("Login Successful! Fetching session...");
 
     /**
      * (Optional) Fetch and use session after login:
