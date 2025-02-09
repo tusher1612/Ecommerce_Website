@@ -1,36 +1,25 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# eCommerce Website
 
-## Getting Started
+This is an eCommerce website built using **Next.js 14**, **Zustand** for state management, **NextAuth** for user authentication, and a **dummy JSON API** for product data. The project provides a seamless shopping experience with key features such as dynamic product listings, user authentication, and cart/wishlist management.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Dynamic Product Listings**: Fetch and display products from a **dummy JSON API**.
+- **User Authentication**: Secure login and registration using **NextAuth**.
+- **State Management**: Smooth cart and wishlist management with **Zustand**.
+- **Responsive Design**: Optimized for all screen sizes for a seamless experience.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js 14**: A React framework for building the application.
+- **Zustand**: A state management library used for managing the cart and wishlist.
+- **NextAuth**: A simple authentication solution for user login and session management.
+- **Dummy JSON API**: A mock API for fetching product data (used for simulating the backend).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Installation
 
-## Learn More
+To run this project locally, follow these steps:
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Clone the repository:
+   ```bash
+   git clone git@github.com:tusher1612/Ecommerce_Website.git
