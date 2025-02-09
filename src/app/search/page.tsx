@@ -4,6 +4,7 @@ import { StarIcon } from "lucide-react";
 import Link from "next/link";
 import { Product } from "@/types/types";
 import WishlistComponent from "@/components/Wishlist";
+import AddToCart2 from '@/components/FrontaddToCart';
 
 const Search = async ({ searchParams }: { searchParams: { q: string } }) => {
   const { q } = searchParams;
@@ -26,9 +27,10 @@ const Search = async ({ searchParams }: { searchParams: { q: string } }) => {
               className="border p-4 rounded-lg shadow-lg flex flex-col justify-between cursor-pointer"
               key={product.id}
             >
-              <span className="flex ml-auto">
-                <WishlistComponent productId={product.id} />
-              </span>
+             <span className="flex flex-col mr-auto gap-2 absolute">
+        <WishlistComponent  productId={product.id}/> 
+        <AddToCart2   product={product} />
+        </span>
 
               <Link href={`/product/${product.id}`}>
                 <div className="pb-4 rounded-lg flex flex-col">
