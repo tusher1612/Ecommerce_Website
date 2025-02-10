@@ -11,10 +11,12 @@ import { useCartStore, useWishlistStore } from "@/utilities/store/store"
 import { Button } from "./ui/button"
 import { signOut } from "next-auth/react"
 import { getSession } from "@/utilities/utils/getSession"
+
+
 // import { handleFormSubmit } from "@/app/actions/submissionAction"
 
  const  Header=()=>{
-  
+ 
   const session=getSession();
    //console.log("This is session data",session); 
    //console.log(status)
@@ -40,7 +42,9 @@ import { getSession } from "@/utilities/utils/getSession"
         router.push(`/products?q=${searchInput}`)
     }
 
- 
+ const handleBusket= ()=> {
+   
+ }
     const handleLogout = () => {
       useCartStore.getState().clearCart(); // Clear cart state in Zustand
       useWishlistStore.getState().clearWishlist(); // Clear wishlist state in Zustand
