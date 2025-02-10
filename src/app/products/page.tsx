@@ -25,7 +25,7 @@ import AddToCart2 from "@/components/FrontaddToCart";
         </span>
      
        
-        <Link key={product.id} href={`/product/${product.id}`} passHref>
+        <Link key={product.id} href={`/products/${product.id}`} passHref>
           <div className=" flex flex-col h-[380px] cursor-pointer">
             {/* Wishlist Toggle */}
            
