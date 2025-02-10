@@ -1,10 +1,9 @@
-import { SingleProduct } from "@/app/utils/actions";
+import { SingleProduct } from "@/utilities/utils/actions";
 import Image from "next/image";
-import demo from "@/public/images/demo.jpg"; // Fallback image
-import { Button } from "@/components/ui/button";
+import demo from "@/utilities/public/images/demo.jpg"; // Fallback image
 import { Star } from "lucide-react";
-import AddToCart from "@/components/AddToCart";
-import { Params } from "@/types/types";
+import AddToCart from "@/utilities/components/AddToCart";
+import { Params } from "@/utilities/types/types";
 
 
  const  Product= async({ params }: { params: Params })=> {

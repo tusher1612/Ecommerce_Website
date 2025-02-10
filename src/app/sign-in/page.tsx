@@ -1,9 +1,9 @@
 'use client'
 
 import { signIn , getSession} from "next-auth/react";
-import { handleLogin } from "../actions/handleLogin";
+import { handleLogin } from "../../utilities/actions/handleLogin";
 import { useState } from "react";
-import { useCartStore,useWishlistStore } from "@/store/store";
+import { useCartStore,useWishlistStore } from "@/utilities/store/store";
 import { useSession } from "next-auth/react";
 
 const SignIn =()=> {

@@ -1,21 +1,12 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Header from "../components/header";
-import Footer from "@/components/Footer";
+import Header from "@/utilities/components/header";
+import Footer from "@/utilities/components/Footer";
 import React from "react";
 import { SessionProvider } from "next-auth/react";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+
 
 export const metadata: Metadata = {
   title: "Ecommerce",
@@ -31,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
          <SessionProvider>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body >
          {/* Fixed closing tag */}
           <div className="min-h-screen flex flex-col">
             <Header />

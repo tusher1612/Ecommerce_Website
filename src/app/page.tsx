@@ -1,4 +1,4 @@
-import Gridoption from "@/components/Gridoption";
+import Gridoption from "@/utilities/components/Gridoption";
 import demo from '@/public/images/demo.jpg'
 import Allproduct from "./products/page";
 // import {fetchProducts} from '@/app/actions/actions'

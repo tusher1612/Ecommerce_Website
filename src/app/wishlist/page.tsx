@@ -1,13 +1,13 @@
 "use client";
 
-import { useWishlistStore } from "@/store/store"; // Zustand store
-import { fetchProducts } from "@/app/utils/actions"; // Fetch function
-import { groupProductsById } from "@/app/utils/wishlistActions"; // Grouping function
-import { Product } from "@/types/types";
+import { useWishlistStore } from "@/utilities/store/store"; // Zustand store
+import { fetchProducts } from "@/utilities/utils/actions"; // Fetch function
+import { groupProductsById } from "@/utilities/utils/wishlistActions"; // Grouping function
+import { Product } from "@/utilities/types/types";
 import { HeartIcon } from "lucide-react";
-import WishlistItem from "@/components/WishlistItem"; // WishlistItem component
+import WishlistItem from "@/utilities/components/WishlistItem"; // WishlistItem component
 // import { useSession } from "next-auth/react"
-import { getSession } from "../utils/getSession";
+import { getSession } from "../../utilities/utils/getSession";
 
 const  WishlistPage= async() => {
   const wishlist = useWishlistStore((state) => state.wishlist);
