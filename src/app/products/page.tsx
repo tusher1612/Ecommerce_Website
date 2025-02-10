@@ -1,8 +1,8 @@
-"use client";
+
 import { fetchProducts } from "@/utilities/utils/actions";
 import { querySearch } from "@/utilities/utils/searchActions";
 import Image from "next/image";
-import { HeartIcon, StarIcon } from "lucide-react";
+import {  StarIcon } from "lucide-react";
 import Link from "next/link";
 import { Product } from "@/utilities/types/types";
 import WishlistComponent from "@/utilities/components/Wishlist";

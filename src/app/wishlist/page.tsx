@@ -3,7 +3,7 @@
 import { useWishlistStore } from "@/utilities/store/store"; // Zustand store
 import { fetchProducts } from "@/utilities/utils/actions"; // Fetch function
 import { groupProductsById } from "@/utilities/utils/wishlistActions"; // Grouping function
-import { Product } from "@/utilities/types/types";
+
 import { HeartIcon } from "lucide-react";
 import WishlistItem from "@/utilities/components/WishlistItem"; // WishlistItem component
 // import { useSession } from "next-auth/react"
