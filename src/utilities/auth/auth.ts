@@ -1,5 +1,5 @@
 // Importing necessary modules from NextAuth for authentication handling
-import NextAuth, { Session } from "next-auth";
+import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
 // Hardcoded list of users for demonstration purposes (in production, users should be fetched from a database)
@@ -69,9 +69,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (token) {
         // Add token data to session user object
         session.user = {
-          id: token.id as string ?? "", // Ensure id is available in session
-          email: token.email as string ?? "", // Ensure email is available in session
-          name: token.name as string ?? "", // Ensure name is available in session
+          id: token.id as string , // Ensure id is available in session
+          email: token.email as string , // Ensure email is available in session
+          name: token.name as string , // Ensure name is available in session
           emailVerified: token.emailVerified ? new Date() : null, // Set email verification status as Date or null
         };
       }
