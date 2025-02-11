@@ -6,14 +6,15 @@ import { groupProductsById } from "@/utilities/utils/wishlistActions"; // Groupi
 import { HeartIcon } from "lucide-react";
 import WishlistItem from "@/utilities/components/wishlist/WishlistItem"; // WishlistItem component
 // import { useSession } from "next-auth/react"
-import { getSession } from "../../utils/getSession";
+// import { getSession } from "../../utils/session/getSession";
 import { Product } from "@/utilities/types/types";
+import { useSession } from "next-auth/react";
 
 const  WishlistComponent= ({ products }: { products: Product[] }) => {
   const wishlist = useWishlistStore((state) => state.wishlist);
   const sessionWishlist=useWishlistStore((state)=>state.sessionWishlist)
   const removeFromWishlist = useWishlistStore((state) => state.removeFromWishlist);
-   const session=getSession();
+   const{data:session}=useSession();
   // Fetch products synchronously using useState with function initializer
  // const products = await fetchProducts();
 console.log("products props", products)

@@ -9,15 +9,15 @@ import { FormEvent } from "react";
 import { useCartStore, useWishlistStore } from "@/utilities/store/store"
 // import { useSession } from "next-auth/react"
 
-import { signOut } from "next-auth/react"
-import { getSession } from "@/utilities/utils/getSession"
+import { signOut, useSession } from "next-auth/react"
+
 
 
 // import { handleFormSubmit } from "@/app/actions/submissionAction"
 
  const  Header=()=>{
  
-  const session=getSession();
+  const {data:session}=useSession();
    //console.log("This is session data",session); 
    //console.log(status)
   const router=useRouter()
@@ -32,7 +32,7 @@ import { getSession } from "@/utilities/utils/getSession"
   //getting session based wishlist 
   const sessionWishlist=useWishlistStore((state)=>state.sessionWishlist)
   const sessionWishlistLength=Object.keys(sessionWishlist).length;
-  console.log('SessionWIshlistLenth testing',sessionWishlistLength)
+  console.log('SessionWIshlistLength testing',sessionWishlistLength)
 
  const  handleFormSubmit=(e:FormEvent<HTMLFormElement>)=>{
         //tacking unnecessary handling 
@@ -42,9 +42,7 @@ import { getSession } from "@/utilities/utils/getSession"
         router.push(`/products?q=${searchInput}`)
     }
 
- const handleBusket= ()=> {
-   
- }
+
     const handleLogout = () => {
       useCartStore.getState().clearCart(); // Clear cart state in Zustand
       useWishlistStore.getState().clearWishlist(); // Clear wishlist state in Zustand
