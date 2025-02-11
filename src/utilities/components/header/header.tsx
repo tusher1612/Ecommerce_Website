@@ -2,15 +2,15 @@
 
 import Image from "next/image"
 import logo from "@/utilities/public/images/walmart-logo-png-27987.png"
-import { Grid2X2CheckIcon, Grid2X2Icon, Heart, LogIn, LogOut, LogOutIcon, LucideGrid2x2Plus, Search, ServerIcon, ShoppingCart, TouchpadOff, User } from "lucide-react"
+import { Grid2X2CheckIcon,  Heart,  LogOutIcon,  Search, ShoppingCart,  User } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { FormEvent } from "react";
 import { useCartStore, useWishlistStore } from "@/utilities/store/store"
 // import { useSession } from "next-auth/react"
-import { Button } from "../ui/button"
+
 import { signOut } from "next-auth/react"
-import { getSession } from "@/utilities/utils/session/getSession"
+import { getSession } from "@/utilities/utils/getSession"
 
 
 // import { handleFormSubmit } from "@/app/actions/submissionAction"
@@ -89,11 +89,6 @@ import { getSession } from "@/utilities/utils/session/getSession"
   </div>
 
 </Link>
-
-
-
-
-
 
   <Link href='/basket' className=" flex  font-bold items-center   text-white text-sm space-x-1.5 md:mt-0 mt-5">
   <ShoppingCart size={20} />

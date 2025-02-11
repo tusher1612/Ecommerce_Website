@@ -1,8 +1,7 @@
 "use client";
-
 import { Product } from "@/utilities/types/types";
 import { useCartStore } from "@/utilities/store/store";
-import { useCartQuantity } from "@/utilities/utils/customhooks/customhooks";
+import { useCartQuantity } from "@/utilities/utils/customhooks";
 import { useSession } from "next-auth/react";
 import { PlusIcon } from "lucide-react";
 

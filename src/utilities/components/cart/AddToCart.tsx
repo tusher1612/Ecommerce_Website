@@ -4,7 +4,7 @@ import { Product } from "@/utilities/types/types";
 import { useCartStore } from "@/utilities/store/store";
 import { Button } from "../ui/button";
 import RemoveFromCart from "./RemoveFromCart";
-import { useCartQuantity } from "@/utilities/utils/customhooks/customhooks";
+import { useCartQuantity } from "@/utilities/utils/customhooks";
 import { useSession } from "next-auth/react";
 
 const AddToCart = ({ product }: { product: Product }) => {

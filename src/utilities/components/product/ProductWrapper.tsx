@@ -1,9 +1,12 @@
+'use client'
+
 import { Product } from "../../types/types";
 import WishlistHeartIcon from "../wishlist/WishlistHeartIcon";
-import AddToCart2 from "@/utilities/components/cart/FrontaddToCart";
+// import AddToCart2 from "@/utilities/components/cart/FrontaddToCart";
 import Image from "next/image";
 import { StarIcon } from "lucide-react";
 import Link from "next/link";
+import AddToCart2 from "../cart/FrontaddToCart";
 
 // Define the props interface explicitly without React.FC
 interface ProductWrapperProps {

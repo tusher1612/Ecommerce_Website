@@ -1,7 +1,7 @@
 // Importing necessary components and types
 import Image from "next/image"; // Next.js Image component for optimized image rendering
 import { Button } from "@/utilities/components/ui/button"; // Custom Button component used in the UI
-import { Product } from "@/utilities/types/types"; // Product type, assumed to be a structure for product data
+ // Product type, assumed to be a structure for product data
 import { WishlistItemProps } from '@/utilities/types/types' // WishlistItemProps type, defines the expected props for WishlistItem component
 
 // WishlistItem component - Displays a single item in the wishlist

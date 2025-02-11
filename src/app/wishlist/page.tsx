@@ -1,4 +1,4 @@
-import { fetchProducts } from "@/utilities/utils/datafetch/datafetch";
+import { fetchProducts } from "@/utilities/utils/datafetch";
 import { Product } from "@/utilities/types/types";
 import WishlistComponent from "@/utilities/components/wishlist/WishlistComponent";
 

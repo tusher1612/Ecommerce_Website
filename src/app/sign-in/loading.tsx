@@ -1,4 +1,4 @@
-import { Skeleton } from "@/utilities/components/ui/skeleton";
+
 import { Loader, LoaderPinwheel } from "lucide-react";
 
 const  Loading=()=>{

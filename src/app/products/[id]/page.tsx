@@ -1,4 +1,4 @@
-import { SingleProduct } from "@/utilities/utils/datafetch/datafetch";
+import { SingleProduct } from "@/utilities/utils/datafetch";
 import { Params, Product } from "@/utilities/types/types";
 import SinglePorductWrapper from "@/utilities/components/product/SingleProductWraper";
 

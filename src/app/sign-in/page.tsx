@@ -1,4 +1,4 @@
-import SignInComponent from "@/utilities/components/SignInComponent";
+import SignInComponent from "@/utilities/components/signin/SignInComponent";
 
 const SignIn = () => {
 
