@@ -1,10 +1,11 @@
 import { fetchProducts } from "@/utilities/utils/fetchactions";
 import { Product } from "@/utilities/types/types";
-import WishlistPage from "@/utilities/components/WishlistPage";
-const  ProductTransfer = async()=> {
+import WishlistComponent from "@/utilities/components/WishlistComponent";
+
+const  WishlistPage = async()=> {
     const products:Product[]=await fetchProducts();
     return (
-     <WishlistPage products={products} />
+     <WishlistComponent products={products} />
     )
     }
-    export default ProductTransfer;
+    export default WishlistPage ;

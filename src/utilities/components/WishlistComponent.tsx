@@ -7,10 +7,10 @@ import { groupProductsById } from "@/utilities/utils/wishlistActions"; // Groupi
 import { HeartIcon } from "lucide-react";
 import WishlistItem from "@/utilities/components/WishlistItem"; // WishlistItem component
 // import { useSession } from "next-auth/react"
-import { getSession } from "../../utilities/utils/getSession";
+import { getSession } from "../utils/getSession";
 import { Product } from "@/utilities/types/types";
 
-const  WishlistPage= ({ products }: { products: Product[] }) => {
+const  WishlistComponent= ({ products }: { products: Product[] }) => {
   const wishlist = useWishlistStore((state) => state.wishlist);
   const sessionWishlist=useWishlistStore((state)=>state.sessionWishlist)
   const removeFromWishlist = useWishlistStore((state) => state.removeFromWishlist);
@@ -57,4 +57,4 @@ console.log("products props", products)
   );
 };
 
-export default WishlistPage;
+export default WishlistComponent;

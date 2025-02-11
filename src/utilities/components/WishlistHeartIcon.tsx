@@ -6,7 +6,7 @@ import { HeartIcon } from "lucide-react"; // Import the HeartIcon component for 
 import { useSession } from "next-auth/react"; // Hook to access the current user's session
 
 // WishlistComponent to manage and display the wishlist functionality
-const WishlistComponent = ({ productId }: { productId: number }) => {
+const WishlistHeartIcon = ({ productId }: { productId: number }) => {
   // Access the wishlist states from the global store using the custom hook
   const wishlist = useWishlistStore((state) => state.wishlist); // Regular wishlist stored in the store
   const sessionWishlist = useWishlistStore((state) => state.sessionWishlist); // Wishlist stored for session-based users
@@ -49,4 +49,4 @@ const WishlistComponent = ({ productId }: { productId: number }) => {
   );
 };
 
-export default WishlistComponent; // Export the component for use in other parts of the app
+export default WishlistHeartIcon ; // Export the component for use in other parts of the app

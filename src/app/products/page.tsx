@@ -5,7 +5,7 @@ import Image from "next/image";
 import {  StarIcon } from "lucide-react";
 import Link from "next/link";
 import { Product } from "@/utilities/types/types";
-import WishlistComponent from "@/utilities/components/Wishlist";
+import WishlistHeartIcon from "@/utilities/components/WishlistHeartIcon";
 import AddToCart2 from "@/utilities/components/FrontaddToCart";
 
 const ProductsList = async ({ searchParams }: { searchParams?: { q?: string } }) => {
@@ -23,7 +23,7 @@ const ProductsList = async ({ searchParams }: { searchParams?: { q?: string } })
           {products.map((product: Product) => (
             <div className="border p-4 rounded-lg shadow-lg flex flex-col h-[390px] cursor-pointer" key={product.id}>
               <span className="flex ml-auto gap-1 z-8">
-                <WishlistComponent productId={product.id} />
+                <WishlistHeartIcon productId={product.id} />
                 <AddToCart2 product={product} />
               </span>
               <Link href={`/products/${product.id}`} passHref>
