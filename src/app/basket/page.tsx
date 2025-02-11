@@ -1,4 +1,4 @@
-import BasketWrapper from "@/utilities/components/BasketWrapper";
+import BasketWrapper from "@/utilities/components/Basket/BasketWrapper";
 
 
 const   BasketPage=()=>{

@@ -1,13 +1,13 @@
 "use client";
 
 import { useWishlistStore } from "@/utilities/store/store"; // Zustand store
-import { fetchProducts } from "@/utilities/utils/fetchactions"; // Fetch function
+import { fetchProducts } from "@/utilities/utils/datafetch/datafetch"; // Fetch function
 import { groupProductsById } from "@/utilities/utils/wishlistActions"; // Grouping function
 
 import { HeartIcon } from "lucide-react";
-import WishlistItem from "@/utilities/components/WishlistItem"; // WishlistItem component
+import WishlistItem from "@/utilities/components/wishlist/WishlistItem"; // WishlistItem component
 // import { useSession } from "next-auth/react"
-import { getSession } from "../utils/getSession";
+import { getSession } from "../../utils/session/getSession";
 import { Product } from "@/utilities/types/types";
 
 const  WishlistComponent= ({ products }: { products: Product[] }) => {

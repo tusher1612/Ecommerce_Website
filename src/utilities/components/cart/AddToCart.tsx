@@ -2,13 +2,12 @@
 
 import { Product } from "@/utilities/types/types";
 import { useCartStore } from "@/utilities/store/store";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import RemoveFromCart from "./RemoveFromCart";
-import { useCartQuantity } from "@/utilities/utils/hooks";
+import { useCartQuantity } from "@/utilities/utils/customhooks/customhooks";
 import { useSession } from "next-auth/react";
-import { PlusIcon } from "lucide-react";
 
-const AddToCart2 = ({ product }: { product: Product }) => {
+const AddToCart = ({ product }: { product: Product }) => {
   const { data: session } = useSession();
   const cart = useCartStore((state) => state.cart);
   const sessionCart = useCartStore((state) => state.sessionCart);
@@ -29,23 +28,23 @@ const AddToCart2 = ({ product }: { product: Product }) => {
   const renderCartUI = (itemCount: number) => (
     itemCount > 0 ? (
       <div className="flex space-x-5 items-center">
-        {/* <RemoveFromCart product={product} />
-        <p>{itemCount}</p> */}
-        <p
-          className="text-black hover:text-yellow-500" 
+        <RemoveFromCart product={product} />
+        <p>{itemCount}</p>
+        <Button
+          className="bg-walmart-default text-white hover:bg-walmart-default/50"
           onClick={() => handleProduct(itemCount, product.stock)}
         >
-          <PlusIcon/>
-        </p>
+          +
+        </Button>
       </div>
     ) : (
-      <p  className="text-black hover:text-yellow-500" onClick={() => addProduct(product)}>
-       <PlusIcon/>
-      </p>
+      <Button className="bg-walmart-default rounded hover:bg-blue-500" onClick={() => addProduct(product)}>
+        Add to cart
+      </Button>
     )
   );
 
   return session ? renderCartUI(sessionItem) : renderCartUI(howManyItem);
 };
 
-export default AddToCart2;
+export default AddToCart;

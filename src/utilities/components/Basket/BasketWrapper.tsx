@@ -1,6 +1,6 @@
 'use client'
 
-import Basket from "@/utilities/components/Basket";
+import Basket from "@/utilities/components/Basket/Basket";
 import { ShoppingCart} from "lucide-react";
 import { useSession } from "next-auth/react"
 const   BasketWrapper=()=>{

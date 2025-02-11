@@ -1,6 +1,6 @@
 
 import { Product } from "@/utilities/types/types"; // Importing the Product type definition
-import { BASE_URL } from "../config/constant";
+import { BASE_URL } from "../../config/constant";
 
   
 // Function to fetch product data from an external API

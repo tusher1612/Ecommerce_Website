@@ -1,4 +1,4 @@
-import BasketMoadal from "@/utilities/components/BasketModal";
+import BasketMoadal from "@/utilities/components/Basket/BasketModal";
 
 const  BasketModalPage=()=>{
     return (

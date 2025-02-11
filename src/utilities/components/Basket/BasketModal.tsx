@@ -1,6 +1,6 @@
 'use client'
 
-import Basket from "@/utilities/components/Basket";
+import Basket from "@/utilities/components/Basket/Basket";
 import {
     Dialog,
     DialogContent,

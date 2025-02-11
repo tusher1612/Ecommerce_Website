@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
-import Header from "@/utilities/components/header";
-import Footer from "@/utilities/components/Footer";
+import Header from "@/utilities/components/header/header";
+import Footer from "@/utilities/components/footer/Footer";
 import React from "react";
 import { SessionProvider } from "next-auth/react";
 

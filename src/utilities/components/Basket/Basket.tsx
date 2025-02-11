@@ -1,9 +1,9 @@
 // Importing necessary utilities and components
 import { getTotal, groupbyId } from "@/utilities/utils/busketActions"; // Import utility functions for calculating totals and grouping products
 import { useCartStore } from "@/utilities/store/store"; // Import custom hook to access the cart store
-import AddToCart from "./AddToCart"; // Import AddToCart component for adding products to the cart
+import AddToCart from "../cart/AddToCart"; // Import AddToCart component for adding products to the cart
 import Image from "next/image"; // Import Image component from Next.js for image optimization
-import { Button } from "./ui/button"; // Import custom Button component for styling and functionality
+import { Button } from "../ui/button"; // Import custom Button component for styling and functionality
 import { useSession } from "next-auth/react"; // Import useSession hook to manage user session
 import { useRouter } from "next/navigation"; // Import useRouter hook for navigation between pages
 

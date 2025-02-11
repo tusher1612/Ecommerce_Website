@@ -1,6 +1,6 @@
-import { Product } from "../types/types";
-import WishlistHeartIcon from "./WishlistHeartIcon";
-import AddToCart2 from "./FrontaddToCart";
+import { Product } from "../../types/types";
+import WishlistHeartIcon from "../wishlist/WishlistHeartIcon";
+import AddToCart2 from "@/utilities/components/cart/FrontaddToCart";
 import Image from "next/image";
 import { StarIcon } from "lucide-react";
 import Link from "next/link";

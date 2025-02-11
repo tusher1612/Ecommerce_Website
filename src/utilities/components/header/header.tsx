@@ -8,9 +8,9 @@ import { useRouter } from "next/navigation"
 import { FormEvent } from "react";
 import { useCartStore, useWishlistStore } from "@/utilities/store/store"
 // import { useSession } from "next-auth/react"
-import { Button } from "./ui/button"
+import { Button } from "../ui/button"
 import { signOut } from "next-auth/react"
-import { getSession } from "@/utilities/utils/getSession"
+import { getSession } from "@/utilities/utils/session/getSession"
 
 
 // import { handleFormSubmit } from "@/app/actions/submissionAction"

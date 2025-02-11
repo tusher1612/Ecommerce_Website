@@ -2,7 +2,7 @@
 
 import { Product } from "@/utilities/types/types"
 import { useCartStore } from "@/utilities/store/store"
-import { Button } from "./ui/button"
+import { Button } from "../ui/button"
 
  const  RemoveFromCart =( {product}:{product:Product})=>{
 const RemoveCart=useCartStore((state)=> state.removeProduct)

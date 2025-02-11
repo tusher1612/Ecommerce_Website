@@ -1,8 +1,8 @@
 import Image from "next/image";
 import demo from "@/utilities/public/images/demo.jpg"; // Fallback image
 import { Star } from "lucide-react";
-import AddToCart from "@/utilities/components/AddToCart";
-import { Product } from "../types/types";
+import AddToCart from "@/utilities/components/cart/AddToCart";
+import { Product } from "../../types/types";
 
 interface SinglePorductWrapperProps {
   myProduct: Product; // Define the prop type

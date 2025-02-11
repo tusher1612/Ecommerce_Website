@@ -1,6 +1,6 @@
-import { SingleProduct } from "@/utilities/utils/fetchactions";
+import { SingleProduct } from "@/utilities/utils/datafetch/datafetch";
 import { Params, Product } from "@/utilities/types/types";
-import SinglePorductWrapper from "@/utilities/components/SingleProductWraper";
+import SinglePorductWrapper from "@/utilities/components/product/SingleProductWraper";
 
 const SingleProductPage = async ({ params }: { params: Params }) => {
   const productId = Number(params.id); // Convert to number
