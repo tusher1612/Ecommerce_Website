@@ -1,11 +1,13 @@
 
 import { Product } from "@/utilities/types/types"; // Importing the Product type definition
+import { BASE_URL } from "../config/constant";
+
   
 // Function to fetch product data from an external API
 export const fetchProducts = async (): Promise<Product[]> => {
   try {
     // Fetch product data from the dummy API with a limit of 10 products
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/products?limit=10`);
+    const res = await fetch(`${BASE_URL}/products?limit=10`);
 
 
     // If the response is not OK (e.g., 404, 500 errors), throw an error
@@ -34,6 +36,9 @@ export const fetchProducts = async (): Promise<Product[]> => {
     return [];
   }
 };
+
+
+
 
 // ===================== 🔴 COMMENTED OUT CODE 🔴 ===================== //
 // The following search function was commented out because the API 

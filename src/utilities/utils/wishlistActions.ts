@@ -14,32 +14,30 @@ import { Product } from "@/utilities/types/types";
  * @returns {Record<string, Product[]>} - An object where keys are product IDs, and values are arrays of products that are in the wishlist.
  */
 export const groupProductsById = (
-    products: Product[],                // List of products to group
-    wishlist: Record<number, boolean>   // Wishlist object with product IDs as keys and boolean values
+  products: Product[] | undefined,  // Allow products to be undefined
+  wishlist: Record<number, boolean>
 ): Record<string, Product[]> => {
 
-  // Using `reduce` to iterate over the products array and accumulate grouped products based on their IDs
-  return products?.reduce((accumulator: Record<string, Product[]>, currentProduct: Product) => {
+  // Ensure products is always an array before calling reduce
+  if (!Array.isArray(products)) {
+    console.error("Error: products is not a valid array", products);
+    return {};  // Return an empty object to prevent errors
+  }
 
-    const productId = currentProduct.id;  // Get the ID of the current product
-  
-    // Check if the product is in the wishlist using its ID
+  return products.reduce((accumulator: Record<string, Product[]>, currentProduct: Product) => {
+    const productId = currentProduct.id;
+
     if (wishlist[productId]) {
-
-      // If the product is not already in the accumulator object, create a new entry with an empty array
       if (!accumulator[productId]) {
         accumulator[productId] = [];
       }
-
-      // Push the current product into the corresponding array for this product ID in the accumulator
       accumulator[productId].push(currentProduct);
     }
 
-    // Return the updated accumulator for the next iteration
     return accumulator;
-
-  }, {});  // Initialize the accumulator as an empty object
+  }, {});
 };
+
 
 
   

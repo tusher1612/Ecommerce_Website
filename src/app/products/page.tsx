@@ -1,5 +1,5 @@
 
-import { fetchProducts } from "@/utilities/utils/actions";
+import { fetchProducts } from "@/utilities/utils/fetchactions";
 import { querySearch } from "@/utilities/utils/searchActions";
 import Image from "next/image";
 import {  StarIcon } from "lucide-react";

@@ -1,4 +1,4 @@
-import { SingleProduct } from "@/utilities/utils/actions";
+import { SingleProduct } from "@/utilities/utils/fetchactions";
 import Image from "next/image";
 import demo from "@/utilities/public/images/demo.jpg"; // Fallback image
 import { Star } from "lucide-react";

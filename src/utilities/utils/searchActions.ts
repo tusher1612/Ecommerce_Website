@@ -1,3 +1,5 @@
+import { BASE_URL } from "../config/constant";
+
 /**
  * Function: `querySearch`
  * This function searches for products based on the provided query string.
@@ -9,7 +11,7 @@
 export const querySearch = async (query: string) => {
   try {
     // Fetch product data from the API using the search query
-   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/products/search?q=${query}`);
+   const res = await fetch(`${BASE_URL}/products/search?q=${query}`);
 
 
     // Check if the API request was successful
