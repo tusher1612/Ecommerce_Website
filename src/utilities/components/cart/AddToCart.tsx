@@ -1,7 +1,7 @@
 "use client";
 
 import { Product } from "@/utilities/types/types";
-import { useCartStore } from "@/utilities/store/store";
+import { useCartStore } from "@/utilities/zustandstore/store";
 import { Button } from "../ui/button";
 import RemoveFromCart from "./RemoveFromCart";
 import { useCartQuantity } from "@/utilities/utils/customhooks";

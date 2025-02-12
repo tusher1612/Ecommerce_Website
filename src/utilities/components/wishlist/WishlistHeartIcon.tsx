@@ -1,7 +1,7 @@
 "use client"; // Indicates this component is to be used in a client-side environment with React
 
 // Import necessary hooks and components
-import { useWishlistStore } from "@/utilities/store/store"; // Custom hook to access the wishlist state in the global store
+import { useWishlistStore } from "@/utilities/zustandstore/store"; // Custom hook to access the wishlist state in the global store
 import { HeartIcon } from "lucide-react"; // Import the HeartIcon component for the wishlist button
 import { useSession } from "next-auth/react"; // Hook to access the current user's session
 

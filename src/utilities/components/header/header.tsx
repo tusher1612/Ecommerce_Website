@@ -6,7 +6,7 @@ import { Grid2X2CheckIcon,  Heart,  LogOutIcon,  Search, ShoppingCart,  User } f
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { FormEvent } from "react";
-import { useCartStore, useWishlistStore } from "@/utilities/store/store"
+import { useCartStore, useWishlistStore } from "@/utilities/zustandstore/store"
 // import { useSession } from "next-auth/react"
 
 import { signOut, useSession } from "next-auth/react"

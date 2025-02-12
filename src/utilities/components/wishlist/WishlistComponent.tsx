@@ -1,6 +1,6 @@
 "use client";
 
-import { useWishlistStore } from "@/utilities/store/store"; // Zustand store
+import { useWishlistStore } from "@/utilities/zustandstore/store"; // Zustand store
 import { groupProductsById } from "@/utilities/utils/wishlistActions"; // Grouping function
 
 import { HeartIcon } from "lucide-react";

@@ -60,7 +60,7 @@ const ProductWrapper = ({ products, query }: ProductWrapperProps) => {
           ))}
         </div>
       )}
-      {isSearchActive && <footer className="mt-auto">Footer Content</footer>}
+     
     </div>
   );
 }
