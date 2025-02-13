@@ -1,6 +1,6 @@
-import { SingleProduct } from "@/utilities/Product/ProductFetch";
+import { SingleProduct } from "@/utilities/ProductActions/ProductFetch";
 import { Params, Product } from "@/utilities/types/types";
-import SinglePorductWrapper from "@/utilities/components/product/SingleProductWraper";
+import SingleProductWrapper from "@/utilities/components/product/SingleProductWraper";
 
 const SingleProductPage = async ({ params }: { params: Params }) => {
   const productId = Number(params.id); // Convert to number
@@ -12,7 +12,7 @@ const SingleProductPage = async ({ params }: { params: Params }) => {
   }
 
   return (
-    <SinglePorductWrapper myProduct={myProduct} />
+    <SingleProductWrapper myProduct={myProduct} />
   );
 };
 

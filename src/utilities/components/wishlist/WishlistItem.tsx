@@ -1,47 +1,40 @@
-// Importing necessary components and types
-import Image from "next/image"; // Next.js Image component for optimized image rendering
-import { Button } from "@/utilities/components/ui/button"; // Custom Button component used in the UI
- // Product type, assumed to be a structure for product data
-import { WishlistItemProps } from '@/utilities/types/types' // WishlistItemProps type, defines the expected props for WishlistItem component
+// WishlistItem Component - Displays a single product in the wishlist with an image, title, description, and a remove button.
 
-// WishlistItem component - Displays a single item in the wishlist
+import Image from "next/image";
+import { Button } from "@/utilities/components/ui/button";
+import { WishlistItemProps } from '@/utilities/types/types';
+
 const WishlistItem = ({ item, onRemove }: WishlistItemProps) => {
   return (
-    // List item for individual product display, styled with padding and flex layout
     <li className="p-2 my-2 flex items-center justify-between">
       <div className="flex items-center space-x-4">
-        {/* Product image */}
         <Image
-          src={item.image} // Image URL from the item object
-          alt={item.title} // Alt text, using the product title for better accessibility
-          height={100} // Fixed height for the image
-          width={100} // Fixed width for the image
-          className="rounded-lg" // Adding rounded corners to the image
+          src={item.image}
+          alt={item.title}
+          height={100}
+          width={100}
+          className="rounded-lg"
         />
         
         <div>
-          {/* Product title displayed in bold with line-clamping for truncating long titles */}
           <p className="font-bold line-clamp-2">{item.title}</p>
-          
-          {/* Product description - line clamped and safely rendered HTML */}
           <div
-            className="line-clamp-1 text-sm mt-2 font-light" // Small, light text with some margin-top for spacing
-            dangerouslySetInnerHTML={{ __html: item.description }} // Used for rendering raw HTML content from the product description
+            className="line-clamp-1 text-sm mt-2 font-light"
+            dangerouslySetInnerHTML={{ __html: item.description }}
           />
         </div>
       </div>
 
       <div className="flex flex-col items-end justify-between">
-        {/* Remove button for the item in the wishlist */}
         <Button
-          className="bg-red-500 hover:bg-red-300 rounded-full px-4 py-2 text-white text-sm" // Styling the button (rounded, red background, small text)
-          onClick={() => onRemove(item.id)} // Calling onRemove function passed from the parent component, passing the item's ID
+          className="bg-red-500 hover:bg-red-300 rounded-full px-4 py-2 text-white text-sm"
+          onClick={() => onRemove(item.id)}
         >
-          Remove {/* Button label */}
+          Remove
         </Button>
       </div>
     </li>
   );
 }
 
-export default WishlistItem; // Exporting the component to be used in other parts of the app
+export default WishlistItem;

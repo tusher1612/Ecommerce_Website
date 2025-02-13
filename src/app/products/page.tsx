@@ -1,6 +1,6 @@
 
-import { fetchProducts } from "@/utilities/Product/ProductFetch";
-import { querySearch } from "@/utilities/Product/searchActions";
+import { fetchProducts } from "@/utilities/ProductActions/ProductFetch";
+import { querySearch } from "@/utilities/ProductActions/searchActions";
 import { Product } from "@/utilities/types/types";
 import ProductWrapper from "@/utilities/components/product/ProductWrapper";
 

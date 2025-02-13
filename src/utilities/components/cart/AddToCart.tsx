@@ -1,3 +1,9 @@
+// This component handles adding products to the cart, displaying the current quantity, 
+// and allowing users to increment or remove items from the cart based on session status. 
+// It uses Zustand for state management and NextAuth for session handling.
+
+
+
 "use client";
 
 import { Product } from "@/utilities/types/types";

@@ -14,6 +14,7 @@
  *   - `stock` (number): The available stock quantity.
  */
 
+
 import { BASE_URL } from "../config/constant";
 import { DummyJsonProduct } from "./ProductFetch";
 

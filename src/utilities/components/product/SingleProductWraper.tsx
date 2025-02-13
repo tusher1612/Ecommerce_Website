@@ -1,20 +1,27 @@
+/**
+ * SingleProductWrapper displays detailed information about a single product. 
+ * It includes the product image, title, description, price, rating, stock availability, 
+ * and an "Add to Cart" button. A fallback image is used if the product image is missing.
+ */
+
+
 import Image from "next/image";
 import demo from "@/public/images/demo.jpg"; // Fallback image
 import { Star } from "lucide-react";
 import AddToCart from "@/utilities/components/cart/AddToCart";
 import { Product } from "../../types/types";
 
-interface SinglePorductWrapperProps {
-  myProduct: Product; // Define the prop type
+interface SingleProductWrapperProps {
+  myProduct: Product; 
 }
 
-const SinglePorductWrapper = ({ myProduct }: SinglePorductWrapperProps) => {
+const SingleProductWrapper = ({ myProduct }: SingleProductWrapperProps) => {
   return (
     <div className="flex flex-col md:flex-row items-center gap-6 p-6" key={myProduct.id}>
-      {/* Left Side - Product Image */}
+    
       <div className="w-full h-[200] md:w-1/2 flex justify-center">
         <Image
-          src={myProduct.image || demo} // Use product image or fallback
+          src={myProduct.image || demo} 
           alt={myProduct.title || "Product Image"}
           width={300}
           height={300}
@@ -22,7 +29,7 @@ const SinglePorductWrapper = ({ myProduct }: SinglePorductWrapperProps) => {
         />
       </div>
 
-      {/* Right Side - Product Details */}
+
       <div className="w-full md:w-1/2 space-y-4">
         <h1 className="text-2xl font-bold">{myProduct.title}</h1>
         <p className="text-gray-600 ">{myProduct.description}</p>
@@ -40,4 +47,4 @@ const SinglePorductWrapper = ({ myProduct }: SinglePorductWrapperProps) => {
   );
 };
 
-export default SinglePorductWrapper;
+export default SingleProductWrapper;

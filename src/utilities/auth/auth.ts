@@ -45,7 +45,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
-  // Set trusted hosts
+
   
 
   pages: {

@@ -1,3 +1,6 @@
+//remote items from the CartList 
+
+
 "use client"
 
 import { Product } from "@/utilities/types/types"

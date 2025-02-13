@@ -19,7 +19,7 @@ export const groupProductsById = (
 
   // Ensure wishlist is an object and not empty
   if (!wishlist || Object.keys(wishlist).length === 0) {
-    console.error("Error: wishlist is empty or invalid", wishlist);
+    console.log("Error: wishlist is empty or invalid", wishlist);
     return {};
   }
 

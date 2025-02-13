@@ -48,7 +48,7 @@ export const fetchProducts = async (): Promise<Product[]> => {
         ? product.images[0]
         : "";
 
-      console.log(image); // Log the image URL to debug
+      //console.log(image); // Log the image URL to debug
 
       return {
         id: product.id,
@@ -67,6 +67,9 @@ export const fetchProducts = async (): Promise<Product[]> => {
     return [];
   }
 };
+
+
+
 
 /**
  * Fetches a single product based on the provided product ID.

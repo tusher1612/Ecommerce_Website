@@ -22,7 +22,7 @@
 
 import { create } from 'zustand'  
 import { persist, createJSONStorage } from 'zustand/middleware'  
-import { Product } from '@/utilities/types/types'  
+import { ModalState, Product } from '@/utilities/types/types'  
 import { CartState, WishlistState} from '@/utilities/types/types'  
 import { getSession } from 'next-auth/react'  
 
@@ -146,6 +146,60 @@ export const useWishlistStore = create<WishlistState>()(
     }
   )
 );
+
+
+
+
+
+export const useModalStore = create<ModalState>()(
+  persist(
+    (set) => ({
+      wishlistModalOpen: false,
+      basketModalOpen: false,
+
+      openWishlistModal: () => {
+        console.log("Opening wishlist modal");
+        set(() => ({ wishlistModalOpen: true }));
+      },
+
+      closeWishlistModal: () => {
+        console.log("Closing wishlist modal");
+        set(() => ({ wishlistModalOpen: false }));
+      },
+
+      toggleWishlistModal: () => {
+        set((state) => {
+          console.log("Toggling wishlist modal", !state.wishlistModalOpen);
+          return { wishlistModalOpen: !state.wishlistModalOpen };
+        });
+      },
+
+      openBasketModal: () => {
+        console.log("Opening basket modal");
+        set(() => ({ basketModalOpen: true }));
+      },
+
+      closeBasketModal: () => {
+        console.log("Closing basket modal");
+        set(() => ({ basketModalOpen: false }));
+      },
+
+      toggleBasketModal: () => {
+        set((state) => {
+          console.log("Toggling basket modal", !state.basketModalOpen);
+          return { basketModalOpen: !state.basketModalOpen };
+        });
+      },
+    }),
+    {
+      name: "modal-storage",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);
+
+
+
 
 
 

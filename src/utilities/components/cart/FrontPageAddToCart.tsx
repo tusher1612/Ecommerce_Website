@@ -1,11 +1,17 @@
+// This component handles adding products to the cart from the front page. It checks the current session, 
+// displays the shopping cart icon, and allows users to add products to the cart or increment the quantity 
+// based on the stock availability, all while utilizing Zustand for state management.
+
+
+
 "use client";
 import { Product } from "@/utilities/types/types";
 import { useCartStore } from "@/utilities/zustandstore/store";
 import { useCartQuantity } from "@/utilities/utils/customhooks";
 import { useSession } from "next-auth/react";
-import { PlusIcon } from "lucide-react";
+import {  ShoppingCart } from "lucide-react";
 
-const AddToCart2 = ({ product }: { product: Product }) => {
+const FrontPageAddToCart = ({ product }: { product: Product }) => {
   const { data: session } = useSession();
   const cart = useCartStore((state) => state.cart);
   const sessionCart = useCartStore((state) => state.sessionCart);
@@ -32,12 +38,12 @@ const AddToCart2 = ({ product }: { product: Product }) => {
           className="text-black hover:text-yellow-500" 
           onClick={() => handleProduct(itemCount, product.stock)}
         >
-          <PlusIcon/>
+          <ShoppingCart/>
         </p>
       </div>
     ) : (
       <p  className="text-black hover:text-yellow-500" onClick={() => addProduct(product)}>
-       <PlusIcon/>
+       <ShoppingCart/>
       </p>
     )
   );
@@ -45,4 +51,4 @@ const AddToCart2 = ({ product }: { product: Product }) => {
   return session ? renderCartUI(sessionItem) : renderCartUI(howManyItem);
 };
 
-export default AddToCart2;
+export default FrontPageAddToCart;

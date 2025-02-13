@@ -1,39 +1,40 @@
+/**
+ * SignInComponent provides a login form where users can enter their email and password. 
+ * It uses NextAuth's `signIn` function to authenticate users with credentials. 
+ * On successful login, the user is redirected to the homepage. 
+ * If authentication fails, an error message is displayed.
+ */
+
 'use client'
 
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 
 const SignInComponent = () => {
-
-const [message,setMessage]=useState('')
-
+  const [message, setMessage] = useState('');
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent the default form submission behavior
+    e.preventDefault(); 
 
-    // Extract user input (email and password) from the form
     const form = e.currentTarget;
     const email = (form.elements.namedItem("email") as HTMLInputElement).value;
     const password = (form.elements.namedItem("password") as HTMLInputElement).value;
 
     try {
-      // Authenticate user with NextAuth using credentials provider
       const result = await signIn("credentials", {
         email,
         password,
-        redirect: false, // Prevent automatic redirect after login
+        redirect: false, 
       });
 
-      console.log("Login Result:", result); // Debugging: Log the response from signIn
+      console.log("Login Result:", result); 
 
-      // Check if authentication failed
       if (result?.error) {
         setMessage("Invalid credentials. Please try again.");
       } else {
         setMessage("Login Successful! Redirecting...");
-
         setTimeout(() => {
-          window.location.href = "/"; // Redirect to homepage
+          window.location.href = "/"; 
         }, 2000);
       }
     } catch (error) {

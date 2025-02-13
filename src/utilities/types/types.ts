@@ -1,4 +1,4 @@
-import {StaticImageData } from "next/image"
+
 
 export type Product = {
     id: number;
@@ -25,14 +25,10 @@ export type User= {
       } 
   }
   
-
- export  type Gridprops= {
-    title:string,
-    image?:string | StaticImageData  ,
-    className?:string
-     
- 
-}
+  export type ProductWrapperProps= {
+    products: Product[];
+    query?: string;
+  }
 
 export interface CartState {
   sessionCart:Product[];
@@ -52,6 +48,17 @@ export type WishlistState= {
   toggleWishlist: (product: Product) => void;
   clearWishlist: () => void;
 }
+
+export type ModalState = {
+  wishlistModalOpen: boolean;
+  basketModalOpen: boolean;
+  openWishlistModal: () => void;
+  closeWishlistModal: () => void;
+  toggleWishlistModal: () => void;
+  openBasketModal: () => void;
+  closeBasketModal: () => void;
+  toggleBasketModal: () => void;
+};
 
 
 export type wishlist ={
