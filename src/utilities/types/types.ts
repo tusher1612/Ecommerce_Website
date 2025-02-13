@@ -43,16 +43,15 @@ export interface CartState {
  
 }
 
-export type WishlistState = {
-  wishlist: { [key: number]: boolean }; // Tracks wishlist state per product
-  sessionWishlist: { [key: number]: boolean }; // Fixed typo: sessionWishist → sessionWishlist
+export type WishlistState= {
+  wishlist: Record<number, Product>; // Store product objects instead of just IDs
+  sessionWishlist: Record<number, Product>;
 
-  addToWishlist: (id: number) => Promise<void>; // Async function to add a product
-  removeFromWishlist: (id: number) => void; // Function to remove a product
-  toggleWishlist: (id: number) => void; // Function to toggle wishlist item
-   // Async function to fetch user wishlist
-  clearWishlist: () => void; // Function to clear the wishlist
-};
+  addToWishlist: (product: Product) => Promise<void>;
+  removeFromWishlist: (id: number) => void;
+  toggleWishlist: (product: Product) => void;
+  clearWishlist: () => void;
+}
 
 
 export type wishlist ={

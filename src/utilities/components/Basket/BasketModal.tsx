@@ -9,26 +9,24 @@ import {
     DialogTitle,
   
   } from "@/utilities/components/ui/dialog"
-import { useRouter } from "next/navigation"
+import { useState } from "react";
   
 
 
 
 
 const  BasketMoadal=()=>{
-const router=useRouter();
 
-const dialogdismiss =()=>{
-    router.back()
-}
+const [isOpen,setisOpen]=useState(true)
+
 
     return (
       
-     <Dialog open
+     <Dialog open={isOpen}
      
      onOpenChange={(isOpen)=> {
         if(!isOpen){
-            dialogdismiss();
+            setisOpen(false)
         }
      }}
      >

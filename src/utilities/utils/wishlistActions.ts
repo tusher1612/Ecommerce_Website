@@ -14,29 +14,30 @@ import { Product } from "@/utilities/types/types";
  * @returns {Record<string, Product[]>} - An object where keys are product IDs, and values are arrays of products that are in the wishlist.
  */
 export const groupProductsById = (
-  products: Product[] | undefined,  // Allow products to be undefined
-  wishlist: Record<number, boolean>
+  wishlist: Record<number, Product> // Store products instead of boolean
 ): Record<string, Product[]> => {
 
-  // Ensure products is always an array before calling reduce
-  if (!Array.isArray(products)) {
-    console.error("Error: products is not a valid array", products);
-    return {};  // Return an empty object to prevent errors
+  // Ensure wishlist is an object and not empty
+  if (!wishlist || Object.keys(wishlist).length === 0) {
+    console.error("Error: wishlist is empty or invalid", wishlist);
+    return {};
   }
 
-  return products.reduce((accumulator: Record<string, Product[]>, currentProduct: Product) => {
+  return Object.values(wishlist).reduce((accumulator: Record<string, Product[]>, currentProduct: Product) => {
     const productId = currentProduct.id;
 
-    if (wishlist[productId]) {
+    // Check if the product exists in the wishlist (assuming it's the product object)
+    if (currentProduct) {
       if (!accumulator[productId]) {
         accumulator[productId] = [];
       }
-      accumulator[productId].push(currentProduct);
+      accumulator[productId].push(currentProduct); // Use the product from the wishlist
     }
 
     return accumulator;
   }, {});
 };
+
 
 
 

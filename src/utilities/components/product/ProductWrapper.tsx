@@ -15,7 +15,7 @@ interface ProductWrapperProps {
 const ProductWrapper = ({ products, query }: ProductWrapperProps) => {
   const isSearchActive = Boolean(query);
 
-  console.log(products)
+  //console.log(products)
 
   return (
     <div className="min-h-screen p-6 flex flex-col">
@@ -30,7 +30,7 @@ const ProductWrapper = ({ products, query }: ProductWrapperProps) => {
             <div className="border p-4 rounded-lg shadow-lg flex flex-col h-[390px] cursor-pointer" key={product.id}>
               
               <span className="flex ml-auto gap-1 z-8">
-               <WishlistHeartIcon productId={product.id} />
+               <WishlistHeartIcon product={product} />
                 <AddToCart2 product={product} />
               </span>
               <Link href={`/products/${product.id}`} passHref>

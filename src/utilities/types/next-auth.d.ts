@@ -1,5 +1,5 @@
 // next-auth.d.ts
-import NextAuth, { DefaultSession, AdapterUser } from "next-auth";
+import  { DefaultSession } from "next-auth";
 
 declare module "next-auth" {
 

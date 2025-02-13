@@ -1,123 +1,157 @@
-'use client'  // Ensures this code only runs on the client-side (not during server-side rendering)
 
-import { create } from 'zustand'  // Zustand is a state management library for React
-import { persist, createJSONStorage } from 'zustand/middleware'  // Middleware for persisting state to storage
-import { Product } from '@/utilities/types/types'  // Import Product type for type safety
-import { CartState, WishlistState, User } from '@/utilities/types/types'  // Import custom types for Cart and Wishlist state
-import { getSession } from 'next-auth/react'  // Function to retrieve session data (from NextAuth)
+
+/**
+ * Zustand Store for Cart and Wishlist Management
+ *
+ * This store manages the cart and wishlist functionality in a React application using Zustand.
+ * 
+ * - **Cart Management (`useCartStore`)**:
+ *   - Stores both `cart` (for regular users) and `sessionCart` (for admin or session-based tracking).
+ *   - Supports adding, removing, and clearing products from the cart.
+ *   - Uses NextAuth's `getSession` to check if the user is an admin and modifies `sessionCart` accordingly.
+ *   - Persists cart data using sessionStorage to maintain the cart during the session.
+ *
+ * - **Wishlist Management (`useWishlistStore`)**:
+ *   - Stores `wishlist` (for regular users) and `sessionWishlist` (for session-based tracking).
+ *   - Allows adding, removing, and toggling wishlist items.
+ *   - Uses `getSession` to handle admin-specific session wishlist updates.
+ *   - Persists wishlist data using sessionStorage.
+ *
+ * The store ensures a seamless user experience by persisting session-based data while maintaining efficient state updates.
+ */
+
+import { create } from 'zustand'  
+import { persist, createJSONStorage } from 'zustand/middleware'  
+import { Product } from '@/utilities/types/types'  
+import { CartState, WishlistState} from '@/utilities/types/types'  
+import { getSession } from 'next-auth/react'  
 
 export const useCartStore = create<CartState>()(
   persist(
     (set, get) => ({
-      cart: [],  // The array to store products in the cart (for regular users)
-      sessionCart: [],  // A session-specific cart (for tracking cart items for the session, especially for admins)
+      cart: [],  
+      sessionCart: [],  
       
-      // Function to add a product to the cart
       addProduct: async (product: Product) => {
-        const session = await getSession();  // Get session data (user details)
+        const session = await getSession();  
 
         set((state) => {
-          const newCart = [...state.cart, product];  // Create a new array by adding the product to the existing cart
+          const newCart = [...state.cart, product];  
 
-          // If the logged-in user is an admin, only update sessionCart
           if (session?.user.name === 'admin') {
             return { 
-              sessionCart: newCart  // Update sessionCart with the new product
+              sessionCart: newCart  
             };
           } else {
-            // For regular users, update both the cart and sessionCart
             return { 
-              cart: newCart,  // Update the user's cart
-              sessionCart: newCart  // Update the sessionCart to sync with the cart
+              cart: newCart,  
+              sessionCart: newCart  
             };
           }
         });
       },
 
-      // Function to remove a product from the cart
       removeProduct: (id: number) => {
-        const index = get().cart.findIndex((p) => p.id === id);  // Find the product by its ID
-        if (index === -1) return;  // If the product is not found, do nothing
+        const index = get().cart.findIndex((p) => p.id === id);  
+        if (index === -1) return;  
 
-        // Remove the product from the cart and sessionCart
         set((state) => {
           const newCart = [...state.cart];
-          newCart.splice(index, 1);  // Remove the product from the cart array
+          newCart.splice(index, 1);  
 
           return { 
-            cart: newCart,  // Update the cart state
-            sessionCart: newCart  // Update the sessionCart as well
+            cart: newCart,  
+            sessionCart: newCart  
           };
         });
       },
 
-      // Function to clear the cart on logout
       clearCart: () => {
-        set({ cart: [] });  // Set the cart to an empty array, effectively clearing it
+        set({ cart: [] });  
       },
     
     }),
     {
-      name: 'cart-storage',  // Name of the persisted store
-      storage: createJSONStorage(() => sessionStorage),  // Store the cart data in sessionStorage, so it persists during session
+      name: 'cart-storage',  
+      storage: createJSONStorage(() => sessionStorage),  
     }
   )
 );
 
-// Wishlist Store to manage the user's wishlist state
 export const useWishlistStore = create<WishlistState>()(
   persist(
     (set) => ({
-      wishlist: {},  // Object to track the wishlist items (key-value pairs where key is product ID)
-      sessionWishlist: {},  // Object to track the wishlist items for the current session (separate from the main wishlist)
-      
-      // Function to add a product to the wishlist
-      addToWishlist: async (id) => {
-        const session = await getSession();  // Get session data (user details)
+      wishlist: {},
+      sessionWishlist: {},
+
+      addToWishlist: async (product) => {
+        const session = await getSession();
 
         set((state) => {
-          // If the logged-in user is an admin, only update the sessionWishlist
           if (session?.user.name === "admin") {
             return {
-              sessionWishlist: { ...state.sessionWishlist, [id]: true },  // Mark the product as in the wishlist
+              wishlist: state.wishlist, // Ensure wishlist is returned
+              sessionWishlist: { ...state.sessionWishlist, [product.id]: product },
             };
           } else {
-            // For regular users, update both the wishlist and sessionWishlist
             return {
-              wishlist: { ...state.wishlist, [id]: true },  // Mark the product as in the wishlist for the user
-              sessionWishlist: { ...state.sessionWishlist, [id]: true },  // Mark the product as in the sessionWishlist
+              wishlist: { ...state.wishlist, [product.id]: product },
+              sessionWishlist: { ...state.sessionWishlist, [product.id]: product },
             };
           }
         });
       },
 
-      // Function to remove a product from the wishlist
       removeFromWishlist: (id) =>
         set((state) => {
           const updatedWishlist = { ...state.wishlist };
-          delete updatedWishlist[id];  // Remove the product from the wishlist object
+          delete updatedWishlist[id];
+
+          const updatedSessionWishlist = { ...state.sessionWishlist };
+          delete updatedSessionWishlist[id];
 
           return {
-            wishlist: updatedWishlist,  // Update the main wishlist
-            sessionWishlist: updatedWishlist,  // Update the session wishlist to match
+            wishlist: updatedWishlist,
+            sessionWishlist: updatedSessionWishlist,
           };
         }),
 
-      // Function to toggle the wishlist status of a product
-      toggleWishlist: (id) =>
-        set((state) => ({
-          wishlist: { ...state.wishlist, [id]: !state.wishlist[id] },  // Toggle the value for this product ID in the wishlist
-          sessionWishlist: { ...state.sessionWishlist, [id]: !state.sessionWishlist[id] },  // Toggle the value for this product ID in sessionWishlist
-        })),
+      toggleWishlist: (product) =>
+        set((state) => {
+          const isInWishlist = Boolean(state.wishlist[product.id]);
+          const updatedWishlist = { ...state.wishlist };
+          const updatedSessionWishlist = { ...state.sessionWishlist };
 
-      // Function to clear the wishlist
+          if (isInWishlist) {
+            delete updatedWishlist[product.id];
+            delete updatedSessionWishlist[product.id];
+          } else {
+            updatedWishlist[product.id] = product;
+            updatedSessionWishlist[product.id] = product;
+          }
+
+          return {
+            wishlist: updatedWishlist,
+            sessionWishlist: updatedSessionWishlist,
+          };
+        }),
+
       clearWishlist: () => {
-        set({ wishlist: {} });  // Clear all items from the wishlist
+        set({ wishlist: {} });
       },
     }),
     {
-      name: "wishlist-storage",  // Name of the persisted store
-      storage: createJSONStorage(() => sessionStorage),  // Store the wishlist data in sessionStorage
+      name: "wishlist-storage",
+      storage: createJSONStorage(() => sessionStorage),
     }
   )
 );
+
+
+
+
+
+
+
+
+

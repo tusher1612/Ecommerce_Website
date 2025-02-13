@@ -1,47 +1,52 @@
-import { Product } from "@/utilities/types/types"; // Importing the Product type definition
+/**
+ * Purpose:
+ * Utility functions for managing products in the cart, specifically to group products by their ID 
+ * and calculate the total price of all products in the cart.
+ * 
+ * - `groupById`: Groups products by their ID to efficiently manage cart items, especially in cases where 
+ * the same product is added multiple times.
+ * - `getTotal`: Calculates the total price of all products in the cart.
+ * 
+ * @params products: Product[] - An array of products in the cart.
+ * @returns 
+ *   - groupById: A record object where the keys are product IDs (as strings) and the values are arrays of Product objects.
+ *   - getTotal: A number representing the total price of the products in the cart.
+ * 
+ * @example
+ * const groupedProducts = groupById(cartProducts); // Groups products by their ID
+ * const total = getTotal(cartProducts); // Gets the total price of the products
+ */
 
-// Function to group products by their ID to manage items in the cart
-export const groupbyId = (product: Product[]): Record<string, Product[]> => {
-  
-  // Using the `reduce` function to group products based on their ID
+import { Product } from "@/utilities/types/types";
+
+/**
+ * Groups products by their ID to manage cart items efficiently.
+ * 
+ * @params products: Product[] - An array of products in the cart.
+ * @returns A record object where keys are product IDs (as strings) and values are arrays of Product objects.
+ */
+export const groupById = (product: Product[]): Record<string, Product[]> => {
   return product?.reduce(
     (accumulator: Record<string, Product[]>, currentProduct: Product) => {
-      
-      // Extract the product ID
       const productId = currentProduct.id;
-
-      // If the product ID does not exist in the accumulator, initialize it as an empty array
       if (!accumulator[productId]) {
         accumulator[productId] = [];
       }
-
-      // Push the current product into the appropriate group based on its ID
       accumulator[productId].push(currentProduct);
-
-      // Return the updated accumulator object
       return accumulator;
-
-    }, 
-    {} // Initial value: an empty object to store grouped products
+    },
+    {}
   );
 };
 
-// ==================================================================== //
-//                          CART TOTAL FUNCTION                         //
-// ==================================================================== //
 
 /**
- * Function to calculate the total price of all products in the cart.
- * @param {Product[]} products - An array of product objects.
- * @returns {number} - The total price rounded to 2 decimal places.
+ * Calculates the total price of all products in the cart.
+ * 
+ * @params products: Product[] - An array of products in the cart.
+ * @returns A number representing the total price of the products in the cart, rounded to two decimal places.
  */
 export const getTotal = (products: Product[]): number => {
-
-  // Using `reduce` to accumulate the total price of all products
-  const total = products.reduce((acc, currentProduct) => {
-    return acc + currentProduct.price; // Add each product's price to the accumulator
-  }, 0); // Initial accumulator value set to 0
-
-  // Convert the total price to a float with two decimal places
+  const total = products.reduce((acc, currentProduct) => acc + currentProduct.price, 0);
   return parseFloat(total.toFixed(2));
 };

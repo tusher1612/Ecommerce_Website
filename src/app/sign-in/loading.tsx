@@ -1,5 +1,5 @@
 
-import { Loader, LoaderPinwheel } from "lucide-react";
+import { Loader } from "lucide-react";
 
 const  Loading=()=>{
 

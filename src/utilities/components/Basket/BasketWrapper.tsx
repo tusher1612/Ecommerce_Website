@@ -4,7 +4,7 @@ import Basket from "@/utilities/components/Basket/Basket";
 import { ShoppingCart} from "lucide-react";
 import { useSession } from "next-auth/react"
 const   BasketWrapper=()=>{
-     const {data:session ,status}=useSession();
+     const {data:session}=useSession();
     return (
         <div className="flex flex-col items-center justify-center pt-5 w-full">
      <div className="flex items-center gap-2.5"><ShoppingCart size={50} /><span className="text-4xl font-bold">Welcome!  {session?.user?.name}</span></div>

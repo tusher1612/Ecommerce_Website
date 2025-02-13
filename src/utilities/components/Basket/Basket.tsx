@@ -1,11 +1,12 @@
 // Importing necessary utilities and components
-import { getTotal, groupbyId } from "@/utilities/utils/busketActions"; // Import utility functions for calculating totals and grouping products
+import { getTotal, groupById } from "@/utilities/utils/busketActions"; // Import utility functions for calculating totals and grouping products
 import { useCartStore } from "@/utilities/zustandstore/store"; // Import custom hook to access the cart store
 import AddToCart from "../cart/AddToCart"; // Import AddToCart component for adding products to the cart
 import Image from "next/image"; // Import Image component from Next.js for image optimization
 import { Button } from "../ui/button"; // Import custom Button component for styling and functionality
 import { useSession } from "next-auth/react"; // Import useSession hook to manage user session
 import { useRouter } from "next/navigation"; // Import useRouter hook for navigation between pages
+import { Product } from "@/utilities/types/types";
 
 // Basket component where the cart items are displayed
 const Basket = () => {
@@ -21,11 +22,11 @@ const Basket = () => {
 
   // Calculate the total price for the current user's cart and session cart
   const total = getTotal(cart); // Total price for the user's cart
-  const grouped = groupbyId(cart); // Grouping the products in the user's cart by product ID
+  const grouped = groupById(cart); // Grouping the products in the user's cart by product ID
 
   const totalSession = getTotal(sessionCart); // Total price for the session cart (if applicable)
-  const groupedSession = groupbyId(sessionCart); // Grouping the products in the session cart by product ID
-
+  const groupedSession = groupById(sessionCart); // Grouping the products in the session cart by product ID
+//  console.log('Grouped variable type ',typeof grouped);
   // Handle checkout process
   const handleCheckout = () => {
     // If the user is not logged in, redirect them to the sign-in page
@@ -37,10 +38,10 @@ const Basket = () => {
   };
 
   // Function to render cart items, grouped by product ID
-  const renderCartItems = (groupedItems: any, totalAmount: number) => (
+  const renderCartItems = (groupedItems: Record<string, Product[]>, totalAmount: number) => (
     <div className="max-w-2xl mx-auto p-5"> 
       {/* Wrapper div for styling and padding */}
-      
+     
       <ul className="space-y-5 divide-y-2"> 
         {/* List of grouped cart items */}
         {Object.keys(groupedItems).map((id) => { 
