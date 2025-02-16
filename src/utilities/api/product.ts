@@ -16,9 +16,10 @@ export type DummyJsonProduct = {
  * Fetches a list of products from the API with a limit of 10.
  * Returns an array of products mapped to the Product type.
  */
-const fetchAllProducts = async (): Promise<Product[]> => {
+const fetchAllProducts = async (page: number, limit: number = 10): Promise<Product[]> => {
   try {
-    const res = await fetch(`${BASE_URL}/products?limit=10`);
+    const skip = (page - 1) * limit; // Calculate the number of items to skip
+    const res = await fetch(`${BASE_URL}/products?limit=${limit}&skip=${skip}`);
 
     if (!res.ok) {
       throw new Error("Failed to fetch products");
@@ -48,6 +49,7 @@ const fetchAllProducts = async (): Promise<Product[]> => {
     return [];
   }
 };
+
 
 /**
  * Fetches details of a single product by its ID.
@@ -88,9 +90,10 @@ const fetchProductById = async (productId: number) => {
  * Searches for products based on a query string.
  * Returns an array of matching products.
  */
-const searchProducts = async (query: string) => {
+const searchProducts = async (query: string, page: number = 1, limit: number = 10) => {
   try {
-    const res = await fetch(`${BASE_URL}/products/search?q=${query}`);
+    const skip = (page - 1) * limit;
+    const res = await fetch(`${BASE_URL}/products/search?q=${query}&limit=${limit}&skip=${skip}`);
 
     if (!res.ok) {
       throw new Error("Failed to fetch search results");
@@ -113,5 +116,6 @@ const searchProducts = async (query: string) => {
     return [];
   }
 };
+
 
 export { fetchProductById, fetchAllProducts, searchProducts };
