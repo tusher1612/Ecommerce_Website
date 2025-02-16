@@ -18,8 +18,8 @@ export type DummyJsonProduct = {
  */
 const fetchAllProducts = async (page: number, limit: number = 10): Promise<Product[]> => {
   try {
-    const skip = (page - 1) * limit; // Calculate the number of items to skip
-    const res = await fetch(`${BASE_URL}/products?limit=${limit}&skip=${skip}`);
+    //const skip = (page - 1) * limit; // Calculate the number of items to skip
+    const res = await fetch(`${BASE_URL}/products?limit=${limit}`);
 
     if (!res.ok) {
       throw new Error("Failed to fetch products");
