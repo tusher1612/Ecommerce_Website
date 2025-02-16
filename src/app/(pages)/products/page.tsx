@@ -4,18 +4,28 @@ import { fetchAllProducts, searchProducts } from "@/utilities/api/product";
 
 const ProductsList = async ({
   searchParams,
+ // Default to page 1 if not provided
 }: {
-  searchParams?: { q?: string; page?: string; limit?: string };
+  searchParams?: { q?: string };
+  page?: number;  // Current page
 }) => {
   const query = searchParams?.q;
-  const page = Number(searchParams?.page) || 1;
-  const limit = Number(searchParams?.limit) || 12;
 
+  // Define the limit of products per page
+  const limit = 12;
+
+  // Fetch products based on the current page and limit
   const products: Product[] = query
-    ? await searchProducts(query, page, limit)
-    : await fetchAllProducts(page, limit);
+    ? await searchProducts(query, limit)
+    : await fetchAllProducts(limit);
 
-  return <ProductWrapper products={products} query={query} />;
+  return (
+    <ProductWrapper
+      initialProducts={products}
+      query={query}
+  
+    />
+  );
 };
 
 export default ProductsList;

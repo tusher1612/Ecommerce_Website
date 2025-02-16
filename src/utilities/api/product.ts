@@ -1,4 +1,4 @@
-import { BASE_URL } from "../config/constant";
+// import { BASE_URL } from "../config/constant";
 import { Product } from "../types/product.types";
 
 export type DummyJsonProduct = {
@@ -16,10 +16,12 @@ export type DummyJsonProduct = {
  * Fetches a list of products from the API with a limit of 10.
  * Returns an array of products mapped to the Product type.
  */
-const fetchAllProducts = async (page: number, limit: number = 10): Promise<Product[]> => {
+const fetchAllProducts = async (limit: number): Promise<Product[]> => {
   try {
-    //const skip = (page - 1) * limit; // Calculate the number of items to skip
-    const res = await fetch(`${BASE_URL}/products?limit=${limit}`);
+    const res = await fetch(
+      `https://dummyjson.com/products?limit=${limit}`
+    );
+    console.log('response for load more', res);
 
     if (!res.ok) {
       throw new Error("Failed to fetch products");
@@ -57,7 +59,7 @@ const fetchAllProducts = async (page: number, limit: number = 10): Promise<Produ
  */
 const fetchProductById = async (productId: number) => {
   try {
-    const res = await fetch(`${BASE_URL}/products/${productId}`);
+    const res = await fetch(`https://dummyjson.com/products/${productId}`);
 
     if (!res.ok) {
       throw new Error("Failed to fetch product details");
@@ -90,10 +92,12 @@ const fetchProductById = async (productId: number) => {
  * Searches for products based on a query string.
  * Returns an array of matching products.
  */
-const searchProducts = async (query: string, page: number = 1, limit: number = 10) => {
+const searchProducts = async (query: string, limit: number): Promise<Product[]> => {
   try {
-    const skip = (page - 1) * limit;
-    const res = await fetch(`${BASE_URL}/products/search?q=${query}&limit=${limit}&skip=${skip}`);
+    const res = await fetch(
+      `https://dummyjson.com/products/search?q=${query}&limit=${limit}`
+    );
+    console.log('response for load more', res);
 
     if (!res.ok) {
       throw new Error("Failed to fetch search results");
@@ -116,6 +120,7 @@ const searchProducts = async (query: string, page: number = 1, limit: number = 1
     return [];
   }
 };
+
 
 
 export { fetchProductById, fetchAllProducts, searchProducts };
