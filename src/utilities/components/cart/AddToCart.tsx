@@ -1,12 +1,10 @@
-// This component handles adding products to the cart, displaying the current quantity, 
-// and allowing users to increment or remove items from the cart based on session status. 
+// This component handles adding products to the cart, displaying the current quantity,
+// and allowing users to increment or remove items from the cart based on session status.
 // It uses Zustand for state management and NextAuth for session handling.
-
-
 
 "use client";
 
-import { Product } from "@/utilities/types/types";
+import { Product } from "@/utilities/types//product.types";
 import { useCartStore } from "@/utilities/zustandstore/store";
 import { Button } from "../ui/button";
 import RemoveFromCart from "./RemoveFromCart";
@@ -18,7 +16,7 @@ const AddToCart = ({ product }: { product: Product }) => {
   const cart = useCartStore((state) => state.cart);
   const sessionCart = useCartStore((state) => state.sessionCart);
   const addProduct = useCartStore((state) => state.addProduct);
-  
+
   const howManyItem = useCartQuantity(cart, product.id);
   const sessionItem = useCartQuantity(sessionCart, product.id);
 
@@ -31,7 +29,7 @@ const AddToCart = ({ product }: { product: Product }) => {
   };
 
   // Function to render Add to Cart UI
-  const renderCartUI = (itemCount: number) => (
+  const renderCartUI = (itemCount: number) =>
     itemCount > 0 ? (
       <div className="flex space-x-5 items-center">
         <RemoveFromCart product={product} />
@@ -44,11 +42,13 @@ const AddToCart = ({ product }: { product: Product }) => {
         </Button>
       </div>
     ) : (
-      <Button className="bg-walmart-default rounded hover:bg-blue-500" onClick={() => addProduct(product)}>
+      <Button
+        className="bg-walmart-default rounded hover:bg-blue-500"
+        onClick={() => addProduct(product)}
+      >
         Add to cart
       </Button>
-    )
-  );
+    );
 
   return session ? renderCartUI(sessionItem) : renderCartUI(howManyItem);
 };

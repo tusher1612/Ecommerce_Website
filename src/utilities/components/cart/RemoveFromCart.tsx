@@ -1,18 +1,20 @@
-//remote items from the CartList 
+//remote items from the CartList
 
+"use client";
 
-"use client"
-
-import { Product } from "@/utilities/types/types"
+import { Product } from "@/utilities/types/product.types";
 import { useCartStore } from "@/utilities/zustandstore/store";
-import { Button } from "../ui/button"
+import { Button } from "../ui/button";
 
- const  RemoveFromCart =( {product}:{product:Product})=>{
-const RemoveCart=useCartStore((state)=> state.removeProduct)
-   return (
-<Button className="bg-walmart-default  hover:bg-walmart-default/50" onClick={()=>RemoveCart(product.id)}>-</Button>
-
-
-    )
-}
+const RemoveFromCart = ({ product }: { product: Product }) => {
+  const RemoveCart = useCartStore((state) => state.removeProduct);
+  return (
+    <Button
+      className="bg-walmart-default  hover:bg-walmart-default/50"
+      onClick={() => RemoveCart(product.id)}
+    >
+      -
+    </Button>
+  );
+};
 export default RemoveFromCart;

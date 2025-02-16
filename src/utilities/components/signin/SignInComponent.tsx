@@ -1,40 +1,41 @@
 /**
- * SignInComponent provides a login form where users can enter their email and password. 
- * It uses NextAuth's `signIn` function to authenticate users with credentials. 
- * On successful login, the user is redirected to the homepage. 
+ * SignInComponent provides a login form where users can enter their email and password.
+ * It uses NextAuth's `signIn` function to authenticate users with credentials.
+ * On successful login, the user is redirected to the homepage.
  * If authentication fails, an error message is displayed.
  */
 
-'use client'
+"use client";
 
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 
 const SignInComponent = () => {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     const form = e.currentTarget;
     const email = (form.elements.namedItem("email") as HTMLInputElement).value;
-    const password = (form.elements.namedItem("password") as HTMLInputElement).value;
+    const password = (form.elements.namedItem("password") as HTMLInputElement)
+      .value;
 
     try {
       const result = await signIn("credentials", {
         email,
         password,
-        redirect: false, 
+        redirect: false,
       });
 
-      console.log("Login Result:", result); 
+      console.log("Login Result:", result);
 
       if (result?.error) {
         setMessage("Invalid credentials. Please try again.");
       } else {
         setMessage("Login Successful! Redirecting...");
         setTimeout(() => {
-          window.location.href = "/"; 
+          window.location.href = "/";
         }, 2000);
       }
     } catch (error) {
@@ -43,35 +44,32 @@ const SignInComponent = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
-      <h1 className="text-3xl font-bold mb-6">Sign in</h1>
-      <form
-        onSubmit={handleLogin}
-        className="flex flex-col gap-4 bg-gray-700 shadow-lg p-6 rounded-lg w-80"
+    <form
+      onSubmit={handleLogin}
+      className="flex flex-col gap-4 bg-gray-700 shadow-lg p-6 rounded-lg w-80"
+    >
+      <input
+        name="email"
+        type="email"
+        placeholder="Email"
+        required
+        className="p-2 text-black rounded-md"
+      />
+      <input
+        name="password"
+        type="password"
+        placeholder="Password"
+        required
+        className="p-2 text-black rounded-md"
+      />
+      <button
+        type="submit"
+        className="bg-blue-500 px-4 py-2 rounded-md text-white hover:bg-blue-600"
       >
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          required
-          className="p-2 text-black rounded-md"
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          required
-          className="p-2 text-black rounded-md"
-        />
-        <button
-          type="submit"
-          className="bg-blue-500 px-4 py-2 rounded-md text-white hover:bg-blue-600"
-        >
-          Login
-        </button>
-        {message && <p className="text-green-500">{message}</p>}
-      </form>
-    </div>
+        Login
+      </button>
+      {message && <p className="text-green-500">{message}</p>}
+    </form>
   );
 };
 

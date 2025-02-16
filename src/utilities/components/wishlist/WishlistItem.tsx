@@ -2,9 +2,14 @@
 
 import Image from "next/image";
 import { Button } from "@/utilities/components/ui/button";
-import { WishlistItemProps } from '@/utilities/types/types';
+import { Product } from "@/utilities/types/product.types";
 
-const WishlistItem = ({ item, onRemove }: WishlistItemProps) => {
+interface PropsType {
+  item: Product;
+  onRemove: (id: number) => void;
+}
+
+const WishlistItem = ({ item, onRemove }: PropsType) => {
   return (
     <li className="p-2 my-2 flex items-center justify-between">
       <div className="flex items-center space-x-4">
@@ -15,7 +20,7 @@ const WishlistItem = ({ item, onRemove }: WishlistItemProps) => {
           width={100}
           className="rounded-lg"
         />
-        
+
         <div>
           <p className="font-bold line-clamp-2">{item.title}</p>
           <div
@@ -35,6 +40,6 @@ const WishlistItem = ({ item, onRemove }: WishlistItemProps) => {
       </div>
     </li>
   );
-}
+};
 
 export default WishlistItem;

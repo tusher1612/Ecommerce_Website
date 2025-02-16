@@ -9,21 +9,23 @@
 
 import { useWishlistStore } from "@/utilities/zustandstore/store";
 import { HeartIcon } from "lucide-react";
-import { Product } from "@/utilities/types/types";
+import { Product } from "@/utilities/types/product.types";
 
 const WishlistHeartIcon = ({ product }: { product: Product }) => {
   const wishlist = useWishlistStore((state) => state.wishlist);
   const sessionWishlist = useWishlistStore((state) => state.sessionWishlist);
-  
+
   //console.log("Wishlist Data:", wishlist);
   //console.log("Session Wishlist Data:", sessionWishlist);
 
   const addToWishlist = useWishlistStore((state) => state.addToWishlist);
-  const removeFromWishlist = useWishlistStore((state) => state.removeFromWishlist);
+  const removeFromWishlist = useWishlistStore(
+    (state) => state.removeFromWishlist
+  );
 
   const handleWishlistClick = () => {
     const isInWishlist = wishlist[product.id] || sessionWishlist[product.id];
-    
+
     if (isInWishlist) {
       removeFromWishlist(product.id);
     } else {
@@ -36,7 +38,9 @@ const WishlistHeartIcon = ({ product }: { product: Product }) => {
     <div onClick={handleWishlistClick} className="cursor-pointer">
       <HeartIcon
         className="flex-end"
-        fill={wishlist[product.id] || sessionWishlist[product.id] ? "red" : "none"}
+        fill={
+          wishlist[product.id] || sessionWishlist[product.id] ? "red" : "none"
+        }
         stroke="black"
       />
     </div>

@@ -1,29 +1,31 @@
-/**
- * NextAuth Authentication Configuration
- *
- * This file configures authentication and session management using NextAuth.
- * 
- * - Uses **Credentials Provider** for authentication with hardcoded users (for demo purposes).
- * - Handles **sign-in, sign-out, and session management**.
- * - Custom **JWT and session callbacks** to store user details.
- * - Defines a custom **sign-in page**.
- * - Uses **JWT-based session strategy** for stateless authentication.
- */
-
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
 const users = [
   { id: "1", name: "Admin", email: "admin123@gmail.com", password: "test123" },
-  { id: "2", name: "John Doe", email: "test123@gmail.com", password: "password123" },
+  {
+    id: "2",
+    name: "John Doe",
+    email: "test123@gmail.com",
+    password: "password123",
+  },
 ];
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  trustHost: true,
   providers: [
     Credentials({
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "Enter your email" },
-        password: { label: "Password", type: "password", placeholder: "Enter your password" },
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "Enter your email",
+        },
+        password: {
+          label: "Password",
+          type: "password",
+          placeholder: "Enter your password",
+        },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
@@ -31,7 +33,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
 
         const user = users.find(
-          (u) => u.email === credentials.email && u.password === credentials.password
+          (u) =>
+            u.email === credentials.email && u.password === credentials.password
         );
 
         if (!user) {
@@ -45,8 +48,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
-
-  
 
   pages: {
     signIn: "/sign-in",
