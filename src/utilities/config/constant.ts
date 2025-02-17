@@ -1,1 +1,4 @@
-export const BASE_URL = process.env.BASE_URL;
+ 'use server'
+ 
+ export const BASE_URL = process.env.BASE_URL;
+// console.log(BASE_URL)

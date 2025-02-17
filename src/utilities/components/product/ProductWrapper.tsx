@@ -43,7 +43,7 @@ const ProductWrapper = ({ initialProducts, query }: PropsType) => {
   }, [limit, query]); // Add query to dependency to reload on search
 
   // Handle next page click (Increase limit)
-  const handleNextPage = () => {
+  const handleLoadMore = () => {
     setLimit((prevLimit) => prevLimit + 12); // Increment limit by 12
   };
 
@@ -109,7 +109,7 @@ const ProductWrapper = ({ initialProducts, query }: PropsType) => {
           <div className="flex justify-center items-center m-4">
          
             <button
-              onClick={handleNextPage}
+              onClick={handleLoadMore}
               disabled={isLoading}
               className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
             >

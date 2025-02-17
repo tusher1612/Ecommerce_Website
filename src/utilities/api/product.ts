@@ -1,5 +1,6 @@
 // import { BASE_URL } from "../config/constant";
 import { Product } from "../types/product.types";
+import { BASE_URL } from "../config/constant";
 
 export type DummyJsonProduct = {
   id: number;
@@ -19,9 +20,12 @@ export type DummyJsonProduct = {
 const fetchAllProducts = async (limit: number): Promise<Product[]> => {
   try {
     const res = await fetch(
-      `https://dummyjson.com/products?limit=${limit}`
+      `${BASE_URL}/products?limit=${limit}`
     );
-    console.log('response for load more', res);
+    // const res = await fetch(
+    //   `https://dummyjson.com/products?limit=${limit}`
+    // );
+   
 
     if (!res.ok) {
       throw new Error("Failed to fetch products");
@@ -59,14 +63,15 @@ const fetchAllProducts = async (limit: number): Promise<Product[]> => {
  */
 const fetchProductById = async (productId: number) => {
   try {
-    const res = await fetch(`https://dummyjson.com/products/${productId}`);
+     const res = await fetch(`${BASE_URL}//products/${productId}`);
+    // const res = await fetch(`https://dummyjson.com/products/${productId}`);
 
     if (!res.ok) {
       throw new Error("Failed to fetch product details");
     }
 
     const data = await res.json();
-
+ console.log("consoling from the function",data)
     const image =
       Array.isArray(data.images) && data.images.length > 0
         ? data.images[0]
@@ -95,7 +100,7 @@ const fetchProductById = async (productId: number) => {
 const searchProducts = async (query: string, limit: number): Promise<Product[]> => {
   try {
     const res = await fetch(
-      `https://dummyjson.com/products/search?q=${query}&limit=${limit}`
+      `${BASE_URL}/products/search?q=${query}&limit=${limit}`
     );
     console.log('response for load more', res);
 
