@@ -1,53 +1,55 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import WishlistHeartIcon from "../wishlist/WishlistHeartIcon";
 import Image from "next/image";
 import { StarIcon } from "lucide-react";
 import Link from "next/link";
 import FrontPageAddToCart from "../cart/FrontPageAddToCart";
 import { Product } from "@/utilities/types/product.types";
-import { fetchAllProducts, searchProducts } from "@/utilities/api/product";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 type PropsType = {
   initialProducts: Product[];
-  query?: string;
 };
 
-const ProductWrapper = ({ initialProducts, query }: PropsType) => {
-  const [products, setProducts] = useState<Product[]>(initialProducts);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [limit, setLimit] = useState<number>(12); // Number of products per page
+const ProductWrapper = ({ initialProducts }: PropsType) => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+  const [limit, setLimit] = useState<number>(12);
+  const [query, setQuery] = useState<string>("");
 
-  // Fetch products based on the current limit
-  const loadProducts = async (): Promise<void> => {
-    if (isLoading) return; // Prevent multiple clicks while loading
-    setIsLoading(true); // Set loading state
+  console.log("Initialize limit", limit);
 
-    try {
-      const newProducts = query
-        ? await searchProducts(query, limit) // Pass limit for pagination
-        : await fetchAllProducts(limit); // Pass limit for pagination
-
-      setProducts(newProducts); // Update the products list with fetched data
-    } catch (error) {
-      console.error("Error loading products:", error);
-    } finally {
-      setIsLoading(false); // Reset loading state
-    }
-  };
-
-  // Load products when the limit changes
   useEffect(() => {
-    loadProducts(); // Load products when limit is updated
-  }, [limit, query]); // Add query to dependency to reload on search
+    const limitFromParams = parseInt(searchParams.get("limit") || "12", 10);
+    const queryFromParams = searchParams.get("query") || "";
+
+    if (limitFromParams !== limit) {
+      setLimit(limitFromParams);
+    }
+    setQuery(queryFromParams);
+  }, [searchParams]);
+
+  const updateSearchQuery = ({ limit }: { limit: number }) => {
+    const updateLimit = limit === 0 || limit === undefined ? 1 : limit;
+    const params = new URLSearchParams(searchParams);
+    params.set("limit", updateLimit.toString());
+    params.set("query", query);
+    const queryString = params.toString();
+    const updatedPath = queryString ? `${pathname}?${queryString}` : pathname;
+    router.replace(updatedPath);
+  };
 
   // Handle next page click (Increase limit)
   const handleLoadMore = () => {
-    setLimit((prevLimit) => prevLimit + 12); // Increment limit by 12
+    console.log("Limit:", limit);
+    const newLimit = limit + 12;
+    console.log("New limit:", newLimit);
+    setLimit(newLimit);
+    updateSearchQuery({ limit: newLimit });
   };
-
-  // Handle previous page click (Decrease limit)
 
   return (
     <div className="min-h-screen p-6 flex flex-col">
@@ -55,12 +57,14 @@ const ProductWrapper = ({ initialProducts, query }: PropsType) => {
         {query ? `Search Results for "${query}"` : "All Products"}
       </h1>
 
-      {query && products.length === 0 ? (
-        <p className="flex items-center justify-center h-screen">No products found</p>
+      {query && initialProducts.length === 0 ? (
+        <p className="flex items-center justify-center h-screen">
+          No products found
+        </p>
       ) : (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {products.map((product: Product) => (
+            {initialProducts.map((product: Product) => (
               <div
                 className="border p-4 rounded-lg shadow-lg flex flex-col h-[390px] cursor-pointer"
                 key={product.id}
@@ -79,22 +83,29 @@ const ProductWrapper = ({ initialProducts, query }: PropsType) => {
                         className="rounded-lg object-contain"
                       />
                     </div>
-                    <p className="text-md font-bold text-black">${product.price}</p>
+                    <p className="text-md font-bold text-black">
+                      ${product.price}
+                    </p>
                     <h2 className="text-sm font-semibold mt-1 line-clamp-1 h-[3rem] overflow-hidden">
                       {product.title}
                     </h2>
                     <p className="-mt-5 text-gray-600 text-sm">
-                      <span className="font-semibold text-black pr-2">Category:</span>
+                      <span className="font-semibold text-black pr-2">
+                        Category:
+                      </span>
                       {product.category}
                     </p>
                     <div className="flex place-items-center gap-1">
                       <div className="flex flex-1 items-center">
                         <StarIcon color="yellow" fill="yellow" />
-                        <p className="mt-4 text-gray-600 text-sm mb-2">{product.rating}</p>
+                        <p className="mt-4 text-gray-600 text-sm mb-2">
+                          {product.rating}
+                        </p>
                       </div>
                       <div>
                         <p className="mt-4 text-gray-600 text-sm">
-                          <span className="font-bold">Stock:</span> {product.stock}
+                          <span className="font-bold">Stock:</span>{" "}
+                          {product.stock}
                         </p>
                       </div>
                     </div>
@@ -104,16 +115,12 @@ const ProductWrapper = ({ initialProducts, query }: PropsType) => {
             ))}
           </div>
 
-          {isLoading && <p className="text-center text-gray-500 mt-4">Loading products...</p>}
-
           <div className="flex justify-center items-center m-4">
-         
             <button
               onClick={handleLoadMore}
-              disabled={isLoading}
               className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
             >
-             Load More
+              Load More
             </button>
           </div>
         </>

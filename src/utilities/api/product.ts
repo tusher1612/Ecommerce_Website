@@ -17,20 +17,26 @@ export type DummyJsonProduct = {
  * Fetches a list of products from the API with a limit of 10.
  * Returns an array of products mapped to the Product type.
  */
-const fetchAllProducts = async (limit: number): Promise<Product[]> => {
+const fetchAllProducts = async (
+  limit: number,
+  query?: string
+): Promise<Product[]> => {
   try {
-    const res = await fetch(
-      `${BASE_URL}/products?limit=${limit}`
-    );
-    // const res = await fetch(
-    //   `https://dummyjson.com/products?limit=${limit}`
-    // );
-   
+    const url =
+      query && query !== undefined
+        ? `${BASE_URL}/products/search?q=${query}&limit=${limit}`
+        : `${BASE_URL}/products?limit=${limit}`;
+    const res = await fetch(url, {
+      method: "GET",
+    });
 
     if (!res.ok) {
-      throw new Error("Failed to fetch products");
+      throw new Error(
+        `Failed to fetch products: ${res.status} ${res.statusText}`
+      );
     }
 
+    // ✅ Properly await the JSON response once
     const data = await res.json();
 
     return data.products.map((product: DummyJsonProduct) => {
@@ -56,14 +62,13 @@ const fetchAllProducts = async (limit: number): Promise<Product[]> => {
   }
 };
 
-
 /**
  * Fetches details of a single product by its ID.
  * Returns the product object with relevant details.
  */
 const fetchProductById = async (productId: number) => {
   try {
-     const res = await fetch(`${BASE_URL}//products/${productId}`);
+    const res = await fetch(`${BASE_URL}//products/${productId}`);
     // const res = await fetch(`https://dummyjson.com/products/${productId}`);
 
     if (!res.ok) {
@@ -71,7 +76,7 @@ const fetchProductById = async (productId: number) => {
     }
 
     const data = await res.json();
- console.log("consoling from the function",data)
+    console.log("consoling from the function", data);
     const image =
       Array.isArray(data.images) && data.images.length > 0
         ? data.images[0]
@@ -93,39 +98,4 @@ const fetchProductById = async (productId: number) => {
   }
 };
 
-/**
- * Searches for products based on a query string.
- * Returns an array of matching products.
- */
-const searchProducts = async (query: string, limit: number): Promise<Product[]> => {
-  try {
-    const res = await fetch(
-      `${BASE_URL}/products/search?q=${query}&limit=${limit}`
-    );
-    console.log('response for load more', res);
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch search results");
-    }
-
-    const data = await res.json();
-
-    return data.products.map((product: DummyJsonProduct) => ({
-      id: product.id,
-      title: product.title,
-      image: product.images[0] || "",
-      category: product.category,
-      price: product.price,
-      description: product.description,
-      rating: product.rating,
-      stock: product.stock,
-    }));
-  } catch (error) {
-    console.error("Error fetching search results:", error);
-    return [];
-  }
-};
-
-
-
-export { fetchProductById, fetchAllProducts, searchProducts };
+export { fetchProductById, fetchAllProducts };
