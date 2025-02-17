@@ -19,7 +19,7 @@ const ProductWrapper = ({ initialProducts }: PropsType) => {
   const router = useRouter();
   const [limit, setLimit] = useState<number>(12);
   const [query, setQuery] = useState<string>("");
-
+  const [loading, setLoading] = useState<boolean>(false);
   console.log("Initialize limit", limit);
 
   useEffect(() => {
@@ -43,12 +43,19 @@ const ProductWrapper = ({ initialProducts }: PropsType) => {
   };
 
   // Handle next page click (Increase limit)
+
+
   const handleLoadMore = () => {
-    console.log("Limit:", limit);
+    if (loading) return; // Prevent multiple clicks
+    setLoading(true);
+  
     const newLimit = limit + 12;
-    console.log("New limit:", newLimit);
     setLimit(newLimit);
-    updateSearchQuery({ limit: newLimit });
+  
+    setTimeout(() => {
+      updateSearchQuery({ limit: newLimit });
+      setLoading(false);
+    }, 1000); // Simulating a delay for smooth loading effect
   };
 
   return (
@@ -86,10 +93,10 @@ const ProductWrapper = ({ initialProducts }: PropsType) => {
                     <p className="text-md font-bold text-black">
                       ${product.price}
                     </p>
-                    <h2 className="text-sm font-semibold mt-1 line-clamp-1 h-[3rem] overflow-hidden">
+                    <h2 className="text-sm font-semibold mt-1 line-clamp-2 h-[3rem] overflow-hidden">
                       {product.title}
                     </h2>
-                    <p className="-mt-5 text-gray-600 text-sm">
+                    <p className="-mt-2 text-gray-600 text-sm">
                       <span className="font-semibold text-black pr-2">
                         Category:
                       </span>
@@ -98,12 +105,12 @@ const ProductWrapper = ({ initialProducts }: PropsType) => {
                     <div className="flex place-items-center gap-1">
                       <div className="flex flex-1 items-center">
                         <StarIcon color="yellow" fill="yellow" />
-                        <p className="mt-4 text-gray-600 text-sm mb-2">
+                        <p className="mt-1 text-gray-600 text-sm mb-2">
                           {product.rating}
                         </p>
                       </div>
                       <div>
-                        <p className="mt-4 text-gray-600 text-sm">
+                        <p className="mt-1 text-gray-600 text-sm">
                           <span className="font-bold">Stock:</span>{" "}
                           {product.stock}
                         </p>
@@ -114,15 +121,29 @@ const ProductWrapper = ({ initialProducts }: PropsType) => {
               </div>
             ))}
           </div>
+          {loading && (
+  <div className="fixed inset-0 bg-white bg-opacity-75 flex items-center justify-center z-50">
+    <div className="animate-spin rounded-full border-4 border-blue-500 border-t-transparent h-12 w-12"></div>
+  </div>
+)}
 
           <div className="flex justify-center items-center m-4">
-            <button
-              onClick={handleLoadMore}
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-            >
-              Load More
-            </button>
-          </div>
+  <button
+    onClick={handleLoadMore}
+    disabled={loading}
+    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors flex items-center"
+  >
+    {loading ? (
+      <>
+        <span className="animate-spin border-2 border-white border-t-transparent rounded-full h-5 w-5 mr-2"></span>
+        Loading...
+      </>
+    ) : (
+      "Load More"
+    )}
+  </button>
+</div>
+
         </>
       )}
     </div>
